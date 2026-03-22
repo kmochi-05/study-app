@@ -5,6 +5,18 @@
 </head>
 <body>
     <h1>学習記録アプリ</h1>
-    <p>ここに内容を追加していく</p>
+    
+    <form action="/add" method="post">
+        <label>科目：</label>
+        <input type="text" name="subject"><br>
+
+        <label>時間（時間）：</label>
+        <input type="number" name="time"><br>
+
+        <label>日付：</label>
+        <input type="date" name="date"><br>
+
+        <button type="submit">記録する</button>
+        </form>
 </body>
 </html>
