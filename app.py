@@ -1,22 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import sqlite3
-
-def init_db():
-    conn = sqlite3.connect("study.db")
-    c = conn.cursor()
-
-    c.execute(""""
-              CREATE TABLE IF NOT EXISTS records (
-              id INTEGER PRIMARY KEY AUTOINCREMENT, 
-              subject TEXT
-              time INTGER,
-              date TEXT
-              )
-              """)
-    
-    conn.commit()
-    conn.close()
-
 
 app = Flask(__name__)
 
@@ -39,10 +22,25 @@ def add():
     conn.commit()
     conn.close()
 
-    return "保存しました"
+    return redirect("/")
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+def init_db():
+    conn = sqlite3.connect("study.db")
+    c = conn.cursor()
+
+    c.execute("""
+              CREATE TABLE IF NOT EXISTS records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                subject TEXT,
+                time INTEGER,
+                date TEXT
+                )
+              """)
+    
+    conn.commit()
+    conn.close()
+
 
 if __name__ == "__main__":
     init_db()
