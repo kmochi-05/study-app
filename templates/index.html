@@ -10,7 +10,7 @@
         <label>科目：</label>
         <input type="text" name="subject"><br>
 
-        <label>時間（時間）：</label>
+        <label>時間（hour）：</label>
         <input type="number" name="time"><br>
 
         <label>日付：</label>
@@ -18,5 +18,22 @@
 
         <button type="submit">記録する</button>
         </form>
+
+        <h2>学習記録一覧</h2>
+
+        <table border="1">
+            <tr>
+                <tr>科目</tr>
+                <tr>時間</tr>
+                <tr>日付</tr>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
 </body>
 </html>

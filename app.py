@@ -1,11 +1,19 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    conn = sqlite3.connect("study.db")
+    c = conn.cursor()
+
+    c.execute("SELECT subject, time, date FROM records")
+    records = c.fetchall()
+
+    conn.close()
+
+    return render_template("index.html", records=records)
 
 @app.route("/add", methods=["POST"])
 def add():
@@ -22,7 +30,7 @@ def add():
     conn.commit()
     conn.close()
 
-    return redirect("/")
+    return redirect(url_for("home"))
 
 
 def init_db():
