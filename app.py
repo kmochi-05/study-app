@@ -11,9 +11,12 @@ def home():
     c.execute("SELECT id, subject, time, date FROM records")
     records = c.fetchall()
 
+    c.execute("SELECT SUM(time) FROM records")
+    total = c.fetchone()[0]
+
     conn.close()
 
-    return render_template("index.html", records=records)
+    return render_template("index.html", records=records, total = total)
 
 @app.route("/add", methods=["POST"])
 def add():
