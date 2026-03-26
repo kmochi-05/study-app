@@ -23,15 +23,21 @@
 
         <table border="1">
             <tr>
-                <tr>科目</tr>
-                <tr>時間</tr>
-                <tr>日付</tr>
+                <th>科目</th>
+                <th>時間</th>
+                <th>日付</th>
+                <th>操作</th>
             </tr>
             {% for record in records %}
             <tr>
-                <td>{{ record[0] }}</td>
                 <td>{{ record[1] }}</td>
                 <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>
+                <td>
+                    <form action="/delete/{{ record[0] }}" method="post">
+                        <button type="submit">削除</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </table>

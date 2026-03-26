@@ -8,7 +8,7 @@ def home():
     conn = sqlite3.connect("study.db")
     c = conn.cursor()
 
-    c.execute("SELECT subject, time, date FROM records")
+    c.execute("SELECT id, subject, time, date FROM records")
     records = c.fetchall()
 
     conn.close()
@@ -48,6 +48,18 @@ def init_db():
     
     conn.commit()
     conn.close()
+
+@app.route("/delete/<int:id>", methods=["POST"])
+def delete(id):
+    conn = sqlite3.connect("study.db")
+    c =conn.cursor()
+
+    c.execute("DELETE FROM records WHERE id = ?", (id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
